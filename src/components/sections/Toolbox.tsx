@@ -118,6 +118,30 @@ export function Toolbox() {
       Runner.run(runner, engine);
       Render.run(render);
 
+      // Custom text rendering on top of physics bodies
+      Matter.Events.on(render, "afterRender", () => {
+        const ctx = canvas.getContext("2d");
+        if (!ctx) return;
+
+        chipBodies.forEach((body) => {
+          const tool = (body as any).toolData as ToolItem;
+          if (!tool) return;
+
+          ctx.save();
+          ctx.translate(body.position.x, body.position.y);
+          ctx.rotate(body.angle);
+
+          ctx.font = "600 12px 'JetBrains Mono', monospace";
+          ctx.textAlign = "center";
+          ctx.textBaseline = "middle";
+
+          ctx.fillStyle = tool.isLearning ? "#F59E0B" : "#F4F4F0";
+          ctx.fillText(tool.name, 0, 0);
+
+          ctx.restore();
+        });
+      });
+
       // Click detection on physics chips
       Matter.Events.on(mouseConstraint, "mousedown", (event: any) => {
         const mousePosition = event.mouse.position;

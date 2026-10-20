@@ -28,9 +28,9 @@ export const siteConfig = {
   },
 
   heroScrambleLines: [
-    "=> Design-led frontend engineering",
-    "=> Product thinking from real problems",
-    "=> API-powered apps and lean serverless",
+    "Design-led frontend engineering",
+    "Product thinking from real problems",
+    "API-powered apps and lean serverless",
   ],
 
   verifiedStats: [
