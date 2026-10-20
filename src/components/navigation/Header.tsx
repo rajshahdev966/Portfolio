@@ -1,110 +1,179 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, Command as CommandIcon } from "lucide-react";
 import { siteConfig } from "@/content/site";
-import { CalmModeToggle } from "@/components/ui/CalmModeToggle";
 import { CommandPalette } from "@/components/ui/CommandPalette";
 import { MobileMenu } from "./MobileMenu";
 import { cn } from "@/lib/utils";
 
 const NAV_LINKS = [
-  { label: "Work", href: "/#work" },
-  { label: "Process", href: "/#process" },
-  { label: "Lab", href: "/lab" },
-  { label: "About", href: "/about" },
-  { label: "Contact", href: "/#contact" },
+  { label: "WORK", href: "/#work", sectionId: "work" },
+  { label: "PROCESS", href: "/#process", sectionId: "process" },
+  { label: "LAB", href: "/lab", sectionId: "lab" },
+  { label: "ABOUT", href: "/about", sectionId: "about" },
+  { label: "CONTACT", href: "/#contact", sectionId: "contact" },
 ];
 
 export function Header() {
   const pathname = usePathname();
   const [paletteOpen, setPaletteOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+  const [activeSection, setActiveSection] = useState<string>("");
+  const lastScrollY = useRef(0);
+
+  // Keyboard shortcut listener for Cmd/Ctrl+K and "/"
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+        e.preventDefault();
+        setPaletteOpen((prev) => !prev);
+      } else if (e.key === "/" && !["INPUT", "TEXTAREA"].includes((e.target as HTMLElement)?.tagName)) {
+        e.preventDefault();
+        setPaletteOpen(true);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
+
+  // Hide on scroll down, show on scroll up
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      if (currentScrollY < 40) {
+        setIsVisible(true);
+      } else if (currentScrollY > lastScrollY.current && currentScrollY > 90) {
+        setIsVisible(false);
+      } else if (currentScrollY < lastScrollY.current) {
+        setIsVisible(true);
+      }
+
+      lastScrollY.current = currentScrollY;
+
+      // Scroll-spy active section detection
+      if (pathname === "/") {
+        const sections = ["contact", "process", "work"];
+        let current = "";
+        for (const id of sections) {
+          const el = document.getElementById(id);
+          if (el) {
+            const rect = el.getBoundingClientRect();
+            if (rect.top <= 200 && rect.bottom >= 200) {
+              current = id;
+              break;
+            }
+          }
+        }
+        setActiveSection(current);
+      } else if (pathname === "/about") {
+        setActiveSection("about");
+      } else if (pathname === "/lab") {
+        setActiveSection("lab");
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [pathname]);
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-40 border-b border-line/60 bg-[#0A0A0B]/80 backdrop-blur-xl">
-        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-          {/* Left: RS Monogram Brand */}
+      <header
+        role="banner"
+        className={cn(
+          "fixed top-0 left-0 right-0 z-40 transition-transform duration-300 ease-out py-6 px-6 sm:px-8 lg:px-12",
+          isVisible ? "translate-y-0" : "-translate-y-full"
+        )}
+        style={{
+          background:
+            "linear-gradient(to bottom, rgba(10, 10, 11, 0.65) 0%, rgba(10, 10, 11, 0.25) 60%, transparent 100%)",
+        }}
+      >
+        <div className="mx-auto flex items-center justify-between max-w-[1600px]">
+          {/* Block 1: Monogram + Name Wordmark */}
           <Link
             href="/"
-            className="group flex items-center gap-2.5 font-display text-lg font-bold tracking-tight text-text hover:text-accent transition-colors"
+            className="group flex items-center gap-2 select-none"
+            aria-label="Raj Shah Home"
           >
-            <span className="flex h-8 w-8 items-center justify-center rounded-lg border border-line bg-surface text-xs font-mono font-bold text-accent transition-all group-hover:border-accent group-hover:shadow-[0_0_12px_rgba(198,255,61,0.3)]">
+            <span className="font-display font-bold text-accent text-lg tracking-tight">
               RS
             </span>
-            <span className="hidden sm:inline-block font-sans text-xs tracking-wider uppercase text-muted group-hover:text-text transition-colors">
-              {siteConfig.name}
+            <span className="font-display font-semibold text-lg tracking-[-0.01em] text-text">
+              RAJ SHAH
             </span>
           </Link>
 
-          {/* Center: Desktop Nav Links */}
-          <nav aria-label="Main Navigation" className="hidden md:flex items-center gap-1 bg-surface/50 border border-line rounded-full px-3 py-1">
+          {/* Block 2 (Desktop): Links */}
+          <nav
+            aria-label="Primary Navigation"
+            className="hidden md:flex items-center gap-8 lg:gap-10"
+          >
             {NAV_LINKS.map((link) => {
-              const isActive =
-                link.href === pathname ||
-                (link.href.startsWith("/#") && pathname === "/" && false);
+              const isActive = activeSection === link.sectionId;
 
               return (
                 <Link
                   key={link.label}
                   href={link.href}
-                  className={cn(
-                    "rounded-full px-3.5 py-1 font-mono text-xs uppercase tracking-wider transition-colors",
-                    isActive
-                      ? "bg-accent/10 text-accent font-semibold"
-                      : "text-muted hover:text-text hover:bg-surface/80"
-                  )}
+                  className="group relative flex items-center gap-1.5 font-sans font-medium text-sm uppercase tracking-[0.08em] select-none cursor-pointer py-1"
                 >
-                  {link.label}
+                  {/* Active Lime Dot */}
+                  {isActive && (
+                    <span
+                      aria-hidden="true"
+                      className="h-1.5 w-1.5 rounded-full bg-accent animate-pulse"
+                    />
+                  )}
+
+                  {/* Text Roll Micro-Animation */}
+                  <span className="roll-container text-muted group-hover:text-text transition-colors">
+                    <span className={cn("roll-text", isActive && "text-text font-semibold")}>
+                      {link.label}
+                    </span>
+                    <span
+                      aria-hidden="true"
+                      className="roll-text text-text"
+                    >
+                      {link.label}
+                    </span>
+                  </span>
                 </Link>
               );
             })}
           </nav>
 
-          {/* Right: Availability, Command Palette Pill, Calm Mode & Mobile Toggle */}
-          <div className="flex items-center gap-2 sm:gap-3">
-            {/* Availability Dot Pill */}
-            <div className="hidden xl:flex items-center gap-2 rounded-full border border-line bg-surface/60 px-3 py-1 font-mono text-[11px] text-muted">
-              <span className="h-2 w-2 rounded-full bg-accent animate-pulse shadow-[0_0_8px_#C6FF3D]" />
-              <span>Available for internships & freelance</span>
-            </div>
-
-            {/* Calm Mode Switch */}
-            <CalmModeToggle showLabel={false} className="hidden sm:inline-flex" />
-
-            {/* Cmd/Ctrl+K Pill */}
-            <button
-              onClick={() => setPaletteOpen(true)}
-              aria-label="Open Command Palette"
-              className="flex items-center gap-1.5 rounded-full border border-line bg-surface px-3 py-1.5 font-mono text-xs text-muted hover:border-accent hover:text-text hover:shadow-[0_0_16px_rgba(198,255,61,0.15)] transition-all cursor-pointer"
-            >
-              <CommandIcon className="h-3 w-3 text-accent" />
-              <span className="hidden sm:inline">Cmd+K</span>
-            </button>
-
-            {/* Mobile Hamburger Button */}
+          {/* Mobile Right: Menu Text Button */}
+          <div className="flex md:hidden items-center">
             <button
               onClick={() => setMobileMenuOpen(true)}
-              aria-label="Open Menu"
-              className="flex md:hidden h-9 w-9 items-center justify-center rounded-lg border border-line bg-surface text-muted hover:text-text"
+              aria-label="Open Navigation Menu"
+              className="font-sans font-medium text-sm uppercase tracking-[0.08em] text-text hover:text-accent transition-colors cursor-pointer py-1 px-2"
             >
-              <Menu className="h-5 w-5" />
+              Menu
             </button>
           </div>
         </div>
       </header>
 
-      {/* Command Palette Modal */}
+      {/* Global Command Palette (Cmd/Ctrl+K and "/") */}
       <CommandPalette isOpen={paletteOpen} onClose={() => setPaletteOpen(false)} />
 
-      {/* Mobile Menu Overlay */}
+      {/* Mobile Full-Screen Menu */}
       <MobileMenu
         isOpen={mobileMenuOpen}
         onClose={() => setMobileMenuOpen(false)}
         links={NAV_LINKS}
+        onOpenSearch={() => {
+          setMobileMenuOpen(false);
+          setPaletteOpen(true);
+        }}
       />
     </>
   );

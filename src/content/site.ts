@@ -33,6 +33,41 @@ export const siteConfig = {
     "API-powered apps and lean serverless",
   ],
 
+  heroCaption: {
+    line1: "I build things",
+    line2: "worth using.",
+  },
+
+  heroStrengthCards: [
+    {
+      id: "card-1",
+      label: "CLASS",
+      text: "Design-led frontend engineering",
+    },
+    {
+      id: "card-2",
+      label: "TRAIT",
+      text: "Product thinking from real problems",
+    },
+    {
+      id: "card-3",
+      label: "ABILITY",
+      text: "API-powered apps and lean serverless",
+    },
+  ],
+
+  heroCtas: {
+    primary: {
+      text: "Explore selected work",
+      href: "/#work",
+    },
+    secondary: {
+      text: "Have a project in mind?",
+      hoverText: "Let's talk",
+      href: "/#contact",
+    },
+  },
+
   verifiedStats: [
     {
       id: "projects",

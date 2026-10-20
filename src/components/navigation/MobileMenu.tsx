@@ -2,7 +2,7 @@
 
 import React, { useEffect } from "react";
 import Link from "next/link";
-import { X, ArrowUpRight } from "lucide-react";
+import { X, ArrowUpRight, Search } from "lucide-react";
 import { siteConfig } from "@/content/site";
 import { CalmModeToggle } from "@/components/ui/CalmModeToggle";
 
@@ -10,9 +10,10 @@ interface MobileMenuProps {
   isOpen: boolean;
   onClose: () => void;
   links: { label: string; href: string }[];
+  onOpenSearch?: () => void;
 }
 
-export function MobileMenu({ isOpen, onClose, links }: MobileMenuProps) {
+export function MobileMenu({ isOpen, onClose, links, onOpenSearch }: MobileMenuProps) {
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
@@ -67,6 +68,29 @@ export function MobileMenu({ isOpen, onClose, links }: MobileMenuProps) {
             <ArrowUpRight className="h-5 w-5 text-muted transition-transform group-hover:text-accent group-hover:rotate-45" />
           </Link>
         ))}
+
+        {/* Search Item that opens Command Palette */}
+        {onOpenSearch && (
+          <button
+            onClick={onOpenSearch}
+            className="group flex items-center justify-between py-2 border-b border-line/30 text-left"
+          >
+            <div className="flex items-baseline gap-4">
+              <span className="font-mono text-xs text-accent">
+                0{links.length + 1}
+              </span>
+              <span className="font-display text-3xl font-bold tracking-tight text-accent group-hover:translate-x-2 transition-all">
+                SEARCH
+              </span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="font-mono text-[10px] uppercase text-muted bg-surface px-2 py-0.5 rounded border border-line">
+                ⌘K
+              </span>
+              <Search className="h-5 w-5 text-accent transition-transform group-hover:scale-110" />
+            </div>
+          </button>
+        )}
       </nav>
 
       {/* Footer Info */}
