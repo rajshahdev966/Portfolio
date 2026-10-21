@@ -39,7 +39,7 @@ export const brewnestProject: Project = {
   ],
   media: {
     poster: "/projects/brewnest/poster.webp",
-    previewVideo: "/projects/brewnest/preview.mp4",
+    previewVideo: "",
     isMediaPending: true,
     screenshots: [
       {

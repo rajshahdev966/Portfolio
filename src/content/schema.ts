@@ -1,21 +1,45 @@
 import { z } from "zod";
 
-export const ProjectLinkSchema = z.object({
-  live: z.string().url().optional(),
-  github: z.string().url().optional(),
-  caseStudy: z.string().optional(),
-  linkedIn: z.string().url().optional(),
+// Helper that sanitizes URLs: if string starts with "www." or lacks protocol, auto-prepends https://
+export const flexibleUrl = z
+  .string()
+  .trim()
+  .transform((val) => {
+    if (!val) return val;
+    if (val.startsWith("http://") || val.startsWith("https://") || val.startsWith("/")) {
+      return val;
+    }
+    return `https://${val}`;
+  });
+
+export const CustomLinkSchema = z.object({
+  label: z.string(),
+  url: flexibleUrl,
+  icon: z.string().optional(),
 });
+
+export const ProjectLinkSchema = z
+  .object({
+    live: flexibleUrl.optional(),
+    github: flexibleUrl.optional(),
+    data: flexibleUrl.optional(), // Data link / dataset / API link
+    caseStudy: z.string().optional(),
+    linkedIn: flexibleUrl.optional(),
+    docs: flexibleUrl.optional(),
+    demo: flexibleUrl.optional(),
+    custom: z.array(CustomLinkSchema).optional(),
+  })
+  .passthrough(); // allows any custom link key (e.g. figma, npm, report, etc.)
 
 export const ProjectMetricSchema = z.object({
   label: z.string(),
   value: z.string(),
-  verified: z.boolean(),
+  verified: z.boolean().default(true),
 });
 
 export const ProjectMediaSchema = z.object({
   previewVideo: z.string().optional(),
-  poster: z.string(),
+  poster: z.string().default("/projects/placeholder.webp"),
   isMediaPending: z.boolean().default(true),
   beforeAfter: z
     .object({
@@ -36,14 +60,14 @@ export const ProjectMediaSchema = z.object({
 });
 
 export const ProjectCaseStudySchema = z.object({
-  context: z.string(),
-  problem: z.string(),
-  constraints: z.array(z.string()),
-  decision: z.string(),
-  implementation: z.array(z.string()),
-  tradeOffs: z.array(z.string()),
-  result: z.string(),
-  learning: z.string(),
+  context: z.string().default(""),
+  problem: z.string().default(""),
+  constraints: z.array(z.string()).default([]),
+  decision: z.string().default(""),
+  implementation: z.array(z.string()).default([]),
+  tradeOffs: z.array(z.string()).default([]),
+  result: z.string().default(""),
+  learning: z.string().default(""),
   architectureNotes: z.array(z.string()).optional(),
 });
 
@@ -51,29 +75,32 @@ export const ProjectSchema = z.object({
   slug: z.string(),
   title: z.string(),
   subtitle: z.string(),
-  category: z.enum([
-    "Product",
-    "Creative Frontend",
-    "React",
-    "Browser Engineering",
-    "Serverless",
-    "Developer Tools",
-  ]),
+  category: z.string(), // Flexible: allows "Product", "Creative Frontend", "Developer Tools", "AI / ML", etc.
   year: z.string(),
-  status: z.string(),
-  statusType: z.enum(["live", "source", "concept", "experiment"]),
+  status: z.string().default("Live Product"),
+  statusType: z.string().default("live"), // "live" | "source" | "concept" | "experiment" | custom
   summary: z.string(),
   accentColor: z.string().default("#C6FF3D"),
-  tags: z.array(z.string()),
-  links: ProjectLinkSchema,
+  tags: z.array(z.string()).default([]),
+  links: ProjectLinkSchema.default({}),
   metrics: z.array(ProjectMetricSchema).default([]),
-  media: ProjectMediaSchema,
-  caseStudy: ProjectCaseStudySchema,
+  media: ProjectMediaSchema.default({ poster: "/projects/placeholder.webp", isMediaPending: true, screenshots: [] }),
+  caseStudy: ProjectCaseStudySchema.default({
+    context: "",
+    problem: "",
+    constraints: [],
+    decision: "",
+    implementation: [],
+    tradeOffs: [],
+    result: "",
+    learning: "",
+  }),
   isFlagship: z.boolean().default(false),
-  order: z.number(),
+  order: z.number().default(99),
 });
 
 export type Project = z.infer<typeof ProjectSchema>;
+export type ProjectLinks = z.infer<typeof ProjectLinkSchema>;
 
 export const TestimonialOrPostSchema = z.object({
   id: z.string(),

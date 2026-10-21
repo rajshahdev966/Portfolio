@@ -38,16 +38,12 @@ export const devintelProject: Project = {
   ],
   media: {
     poster: "/projects/devintel/poster.webp",
-    previewVideo: "/projects/devintel/preview.mp4",
-    isMediaPending: true,
+    previewVideo: "",
+    isMediaPending: false,
     screenshots: [
       {
-        src: "/projects/devintel/heatmap-quantiles.webp",
-        caption: "Quantile-bucketing algorithm mapping raw API commit bytes into 52-week activity cells",
-      },
-      {
-        src: "/projects/devintel/architecture-diagram.webp",
-        caption: "Feature-Sliced Design architecture with separated /api, /hooks, /ui, and /state modules",
+        src: "https://ik.imagekit.io/hqhsgjeub/Portfolio%20Images/Screenshot%202026-10-20%20221114.png",
+        caption: "Screenshot of the dashboard",
       },
     ],
   },

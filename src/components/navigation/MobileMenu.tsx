@@ -4,7 +4,6 @@ import React, { useEffect } from "react";
 import Link from "next/link";
 import { X, ArrowUpRight, Search } from "lucide-react";
 import { siteConfig } from "@/content/site";
-import { CalmModeToggle } from "@/components/ui/CalmModeToggle";
 
 interface MobileMenuProps {
   isOpen: boolean;
@@ -96,7 +95,9 @@ export function MobileMenu({ isOpen, onClose, links, onOpenSearch }: MobileMenuP
       {/* Footer Info */}
       <div className="flex flex-col gap-4 border-t border-line/60 pt-5">
         <div className="flex items-center justify-between">
-          <CalmModeToggle />
+          <span className="font-mono text-[11px] text-accent font-semibold tracking-wider uppercase">
+            Raj Shah · Portfolio
+          </span>
           <span className="font-mono text-[11px] text-muted">
             Ahmedabad, India
           </span>

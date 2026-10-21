@@ -38,7 +38,7 @@ export const tunnelFlapProject: Project = {
   ],
   media: {
     poster: "/projects/tunnel-flap/poster.webp",
-    previewVideo: "/projects/tunnel-flap/preview.mp4",
+    previewVideo: "",
     isMediaPending: true,
     screenshots: [
       {

@@ -2,98 +2,115 @@
 
 import React from "react";
 import { siteConfig } from "@/content/site";
-import { Linkedin, ArrowUpRight, Sparkles } from "lucide-react";
+import { Quote, CheckCircle2, ArrowUpRight, Building2, Sparkles } from "lucide-react";
+import { cn } from "@/lib/utils";
+
+// Initials mapper
+function getInitials(name: string): string {
+  const parts = name.trim().split(" ");
+  if (parts.length >= 2) {
+    return `${parts[0][0]}${parts[parts.length - 1][0]}`.toUpperCase();
+  }
+  return name.slice(0, 2).toUpperCase();
+}
 
 export function Testimonials() {
-  const cards = siteConfig.buildInPublicCards;
+  const testimonials = siteConfig.testimonials || siteConfig.buildInPublicCards;
 
   return (
     <section
-      aria-label="Build in Public & Engineering Insights"
-      className="relative z-20 border-b border-line bg-surface/30 py-24 px-4 sm:px-6 lg:px-8"
+      id="testimonials"
+      aria-label="Client Testimonials and Endorsements"
+      className="relative z-20 border-b border-line bg-[#08080B] py-20 lg:py-28 px-4 sm:px-6 lg:px-8 select-none"
     >
       <div className="mx-auto max-w-7xl">
-        {/* Header */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-16 border-b border-line pb-6">
+        {/* Section Header */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 lg:mb-16 border-b border-line/60 pb-6">
           <div className="flex flex-col gap-2">
-            <span className="font-mono text-xs uppercase tracking-widest text-accent font-semibold flex items-center gap-2">
-              <Sparkles className="h-3.5 w-3.5" />
-              <span>[ 05 / 06 ] · BUILD IN PUBLIC</span>
-            </span>
-            <h2 className="text-heading-2 text-text font-bold uppercase tracking-tight">
-              Engineering Notes
+            <div className="flex items-center gap-2">
+            </div>
+            <h2 className="font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl text-text tracking-tight uppercase leading-none">
+              TESTIMONIALS
             </h2>
           </div>
-          <p className="font-sans text-xs sm:text-sm text-muted max-w-md leading-relaxed">
-            Curated reflections on system architecture, interaction design, and frontend performance written in public.
+
+          <p className="font-sans text-xs sm:text-sm text-muted-dim max-w-md leading-relaxed md:text-right">
+            Feedback from founders, educators, and agency partners on shipping
+            AI integrations, interactive apps, and web platforms with me and Neurolearn Media.
           </p>
         </div>
 
-        {/* 3 Build in Public Cards with 3D Pointer Tilt */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {cards.map((post) => (
-            <div
-              key={post.id}
-              className="group flex flex-col justify-between rounded-[24px] border border-line bg-surface/50 p-8 transition-all hover:border-line-bright hover:shadow-[0_16px_40px_rgba(0,0,0,0.4)]"
-            >
-              <div>
-                {/* Author Info */}
-                <div className="flex items-center justify-between border-b border-line/60 pb-5 mb-5">
-                  <div className="flex items-center gap-3">
-                    <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-surface-elevated font-mono text-xs font-bold text-accent border border-line">
-                      RS
-                    </span>
-                    <div>
-                      <h4 className="font-display text-sm font-bold text-text">
-                        {post.author}
-                      </h4>
-                      <p className="font-mono text-[10px] text-muted-dim">
-                        {post.companyOrContext}
+        {/* 3 Testimonial Cards Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
+          {testimonials.map((item, idx) => {
+            const initials = getInitials(item.author);
+
+            return (
+              <div
+                key={item.id}
+                className="group relative flex flex-col justify-between rounded-2xl border border-line/80 bg-[#0C0C10] p-6 sm:p-8 shadow-xl transition-all duration-300 hover:border-accent/60 hover:shadow-[0_0_30px_rgba(198,255,61,0.12)] hover:-translate-y-1"
+              >
+                {/* Subtle Top-Right Quote Icon Accent */}
+                <div
+                  aria-hidden="true"
+                  className="absolute top-6 right-6 text-white/[0.06] group-hover:text-accent/20 transition-colors duration-300 pointer-events-none"
+                >
+                  <Quote className="h-10 w-10 rotate-180" />
+                </div>
+
+                {/* Top Section: Author Header & Quote */}
+                <div>
+                  {/* Author Header */}
+                  <div className="flex items-center gap-3.5 pb-5 mb-5 border-b border-line/60">
+                    {/* Glowing Initials Badge */}
+                    <div className="relative flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#14190D] border border-accent/40 text-accent font-mono text-sm font-bold shadow-[0_0_12px_rgba(198,255,61,0.15)] group-hover:border-accent group-hover:shadow-[0_0_18px_rgba(198,255,61,0.3)] transition-all">
+                      {initials}
+                    </div>
+
+                    <div className="flex flex-col min-w-0 pr-4">
+                      <h3 className="font-display font-bold text-base text-text tracking-tight truncate group-hover:text-accent transition-colors">
+                        {item.author}
+                      </h3>
+                      <p className="font-mono text-[11px] text-muted-dim truncate">
+                        {item.role}
+                      </p>
+                      <p className="font-sans text-[11px] text-[#A0A0A8] truncate mt-0.5">
+                        {item.companyOrContext}
                       </p>
                     </div>
                   </div>
 
-                  <a
-                    href={post.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="View verified LinkedIn post"
-                    className="text-muted hover:text-accent transition-colors"
-                  >
-                    <Linkedin className="h-4 w-4" />
-                  </a>
+                  {/* Testimonial Quote */}
+                  <blockquote className="font-sans text-xs sm:text-[13px] text-text/80 leading-relaxed tracking-normal mb-6">
+                    &ldquo;{item.content}&rdquo;
+                  </blockquote>
                 </div>
 
-                {/* Content */}
-                <p className="font-sans text-xs sm:text-sm text-muted leading-relaxed mb-6">
-                  "{post.content}"
-                </p>
-              </div>
+                {/* Bottom Section: Delivered Scope & Verification Badge */}
+                <div className="pt-4 border-t border-line/60 flex flex-col gap-3.5">
+                  {item.takeaway && (
+                    <div className="rounded-lg bg-surface/50 border border-line/50 p-2.5">
+                      <p className="font-mono text-[10.5px] text-accent/90 leading-tight">
+                        <span className="font-bold text-accent">SCOPE:</span>{" "}
+                        {item.takeaway}
+                      </p>
+                    </div>
+                  )}
 
-              {/* Takeaway / Footnote */}
-              <div className="pt-5 border-t border-line/60 flex flex-col gap-3">
-                {post.takeaway && (
-                  <p className="font-mono text-[11px] text-accent/90 italic">
-                    Takeaway: {post.takeaway}
-                  </p>
-                )}
-                <div className="flex items-center justify-between font-mono text-[10px] text-muted-dim">
-                  <span>VERIFIED LINKEDIN POST</span>
-                  <a
-                    href={post.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 text-muted hover:text-accent transition-colors"
-                  >
-                    <span>Read thread</span>
-                    <ArrowUpRight className="h-3 w-3" />
-                  </a>
+                  <div className="flex items-center justify-between font-mono text-[10px] text-muted-dim">
+                    <div className="flex items-center gap-1.5 text-accent font-semibold">
+                      <CheckCircle2 className="h-3.5 w-3.5 text-accent" />
+                      <span className="tracking-wider">VERIFIED COLLABORATION</span>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
   );
 }
+
+export default Testimonials;

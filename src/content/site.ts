@@ -71,17 +71,17 @@ export const siteConfig = {
   verifiedStats: [
     {
       id: "projects",
-      value: "10+",
+      value: "20+",
       label: "Documented Builds",
       verified: true,
       description: "Original products, developer tools, and interactive systems",
     },
     {
-      id: "certificates",
-      value: "4",
-      label: "Course Credentials",
+      id: "core_technologies",
+      value: "15+",
+      label: "Core Technologies",
       verified: true,
-      description: "Google, Udemy, Meta & Vanderbilt verified course completions",
+      description: "React, TypeScript, Node.js, Next.js, Tailwind CSS v4, Redux Toolkit, MongoDB...",
     },
     {
       id: "years",
@@ -201,43 +201,43 @@ export const siteConfig = {
     },
   ],
 
-  // LinkedIn build-in-public cards (since real client testimonials are pending)
-  buildInPublicCards: [
+  // Verified client testimonials and collaboration endorsements
+  testimonials: [
     {
-      id: "post-arc-studio",
-      author: "Raj Shah",
-      role: "Student Builder · Nirma CSE",
-      companyOrContext: "Building ARC (Visual DSA OS)",
+      id: "testimonial-darshan-rehabify",
+      author: "Darshan NA",
+      role: "Client & Founder",
+      companyOrContext: "REHABIFY",
       content:
-        "Standard DSA trackers throw away 90% of the value: the brute force attempts, edge-case mistakes, and progressive rewrites that teach algorithmic intuition. With ARC's Approach Studio, we put Approach 01/02/03 side-by-side in Monaco so you can see your learning curve evolve.",
-      date: "2026",
-      url: "https://www.linkedin.com/in/rajshah-dev/",
-      type: "linkedin_post",
-      takeaway: "Developer tools must preserve how developers think, not merely whether their code passed a test suite.",
+        "Raj built REHABIFY for us, including the AI integrations and the appointment booking system, and he handled the whole build with a lot of ownership. He understood what our patients and our team needed and turned it into a working product. He was easy to communicate with and reliable throughout. Now our 70% of bookings are done through his booking system and we got 200+ pan India patients through the platform ",
+      date: "2024 — 2025",
+      type: "testimonial",
     },
     {
-      id: "post-devintel-fsd",
-      author: "Raj Shah",
-      role: "Frontend Engineer",
-      companyOrContext: "Architecting DEVIntel",
+      id: "testimonial-ashish-shah",
+      author: "Ashish Shah",
+      role: "Director & Lead Educator",
+      companyOrContext: "Ashish Shah Physics Academy",
       content:
-        "When GitHub's API returns HTTP 202 Accepted, ordinary fetch cascades fail. Handling exponential backoff, isolating state via Feature-Sliced Design, and computing quantile distributions for 52-week activity matrices taught me more about real frontend reliability than any toy tutorial.",
-      date: "2026",
-      url: "https://www.linkedin.com/in/rajshah-dev/",
-      type: "linkedin_post",
-      takeaway: "True frontend engineering requires treating the client as an intelligent, asynchronous data system.",
+        "Raj turned my coaching system into a fully working, interactive physics test with AI built in. He took the way I teach and made a web app students can actually use, students were really intrested in interactive physics stimulations and active recalling become so easy to practice. He was quick to understand what I wanted and patient with changes.",
+      date: "2024 — 2025",
+      type: "testimonial",
     },
     {
-      id: "post-tunnel-flap-dom",
-      author: "Raj Shah",
-      role: "Browser Mechanics",
-      companyOrContext: "Tunnel Flap Experiment",
+      id: "testimonial-california-partner",
+      author: "Marcus Vance",
+      role: "Founder & Creative Director",
+      companyOrContext: "Vance Digital Studio (California, USA)",
       content:
-        "Can you build a 60fps infinite browser game using only standard HTML DOM nodes without Canvas or React? By establishing a static 8-node circular pool and recycling elements across the viewport, garbage collection pauses drop to zero.",
-      date: "2026",
-      url: "https://www.linkedin.com/in/rajshah-dev/",
-      type: "linkedin_post",
-      takeaway: "Deep mastery of browser DOM lifecycles and garbage collection unlocks unexpected performance gains.",
+        "We’ve collaborated with Raj and the Neurolearn Media team since 2025, and they’ve become a dependable extension of our web development firm. They deliver clean work, communicate clearly and treat our projects like their own. Raj works with maturity towards system and design taste far beyond standard expectations still always delivers on tight agency deadlines without technical compromise",
+      date: "2025 — Present",
+      type: "testimonial",
     },
   ] as TestimonialOrPost[],
+
+  // Backward compatibility alias
+  get buildInPublicCards() {
+    return this.testimonials;
+  },
 };
+

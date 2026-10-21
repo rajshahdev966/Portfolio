@@ -5,7 +5,6 @@ import { StatsTicker } from "@/components/sections/StatsTicker";
 import { SelectedWork } from "@/components/sections/SelectedWork";
 import { Process } from "@/components/sections/Process";
 import { Toolbox } from "@/components/sections/Toolbox";
-import { LabTeaser } from "@/components/sections/LabTeaser";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { Contact } from "@/components/sections/Contact";
 
@@ -30,10 +29,7 @@ export default function HomePage() {
       {/* Toolbox: Matter.js Physics Chip Pile */}
       <Toolbox />
 
-      {/* Interactive Lab Sandbox Teaser */}
-      <LabTeaser />
-
-      {/* Build in Public Engineering Notes */}
+      {/* Client Testimonials & Endorsements */}
       <Testimonials />
 
       {/* Contact Section: Directional Let's Talk */}

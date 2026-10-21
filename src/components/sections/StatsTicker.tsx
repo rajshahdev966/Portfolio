@@ -4,22 +4,29 @@ import React, { useRef, useEffect, useState } from "react";
 import { siteConfig } from "@/content/site";
 import { usePrefersCalm } from "@/hooks/usePrefersCalm";
 
+
 const TICKER_ITEMS = [
-  "NEXT.JS (APP ROUTER)",
-  "REACT 19",
+  "TYPESCRIPT",
   "TAILWIND CSS V4",
   "GSAP & SCROLLTRIGGER",
   "THREE.JS / R3F",
-  "FEATURE-SLICED DESIGN",
-  "REDUX TOOLKIT",
-  "REST APIS & POLLING",
-  "DOM OBJECT POOLING",
-  "FIREBASE SERVERLESS",
+  "INTERACTIVE WEB EXPERIENCES",
+  "UI ENGINEERING",
+  "REST APIS & INTEGRATION",
+  "STATE MANAGEMENT",
+  "FIREBASE",
   "GOOGLE APPS SCRIPT",
-  "JAVA (DSA)",
-  "WEBGL SHADERS",
-  "ACCESSIBILITY (WCAG 2.2 AA)",
+  "JAVA & DATA STRUCTURES",
+  "ALGORITHMS & PROBLEM SOLVING",
+  "WEBGL & SHADERS",
+  "ACCESSIBILITY (WCAG)",
+  "PERFORMANCE OPTIMIZATION",
+  "PRODUCT-FOCUSED DEVELOPMENT",
+  "BUILDING SINCE 2022",
+  "NEXT.JS",
+  "REACT 19",
 ];
+
 
 export function StatsTicker() {
   const { isCalm } = usePrefersCalm();
@@ -78,17 +85,17 @@ export function StatsTicker() {
       </div>
 
       {/* Bottom Part: Smooth Scroll-Reactive Ticker */}
-      <div className="relative w-full overflow-hidden border-t border-line/60 pt-6">
+      <div className="relative w-full overflow-hidden border-t border-line/60 pt-6 text-md ">
         <div
           ref={marqueeRef}
           className="flex w-max items-center gap-8 animate-marquee hover:[animation-play-state:paused]"
         >
           {/* Main Set */}
-          <div className="flex items-center gap-8 shrink-0">
+          <div className="flex items-center gap-8">
             {TICKER_ITEMS.map((tech) => (
               <span
                 key={tech}
-                className="font-mono text-xs uppercase tracking-widest text-muted/70 hover:text-accent transition-colors flex items-center gap-8"
+                className="font-mono uppercase tracking-widest text-muted/70 hover:text-accent transition-colors flex items-center gap-10"
               >
                 <span>{tech}</span>
                 <span className="text-accent/40 font-bold">/</span>

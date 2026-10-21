@@ -6,8 +6,7 @@ import { ArrowLeft, ArrowRight, ExternalLink, Github, Sparkles, CheckCircle2 } f
 import { getProjectBySlug, getAllProjectSlugs, sortedProjects } from "@/content/projects";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
-import { MediaPendingCard } from "@/components/ui/MediaPendingCard";
-import { BeforeAfterSlider } from "@/components/ui/BeforeAfterSlider";
+import { ProjectMediaCarousel } from "@/components/ui/ProjectMediaCarousel";
 import { generateProjectSchema, generateBreadcrumbSchema } from "@/lib/jsonld";
 import { siteConfig } from "@/content/site";
 
@@ -117,7 +116,7 @@ export default async function ProjectCaseStudyPage({ params }: PageProps) {
             </p>
 
             {/* Links Bar */}
-            <div className="flex flex-wrap items-center gap-4 pt-2">
+            <div className="flex flex-wrap items-center gap-3 sm:gap-4 pt-2">
               {project.links.live && (
                 <Button
                   href={project.links.live}
@@ -140,6 +139,39 @@ export default async function ProjectCaseStudyPage({ params }: PageProps) {
                   Source Code
                 </Button>
               )}
+              {project.links.data && (
+                <Button
+                  href={project.links.data}
+                  isExternal
+                  variant="outline"
+                  size="md"
+                  withArrow
+                >
+                  Data / Dataset
+                </Button>
+              )}
+              {project.links.docs && (
+                <Button
+                  href={project.links.docs}
+                  isExternal
+                  variant="ghost"
+                  size="md"
+                  withArrow
+                >
+                  Documentation
+                </Button>
+              )}
+              {project.links.demo && (
+                <Button
+                  href={project.links.demo}
+                  isExternal
+                  variant="ghost"
+                  size="md"
+                  withArrow
+                >
+                  Video Demo
+                </Button>
+              )}
               {project.links.linkedIn && (
                 <Button
                   href={project.links.linkedIn}
@@ -148,9 +180,21 @@ export default async function ProjectCaseStudyPage({ params }: PageProps) {
                   size="md"
                   withArrow
                 >
-                  LinkedIn Announcement
+                  LinkedIn
                 </Button>
               )}
+              {project.links.custom?.map((item) => (
+                <Button
+                  key={item.label}
+                  href={item.url}
+                  isExternal
+                  variant="ghost"
+                  size="md"
+                  withArrow
+                >
+                  {item.label}
+                </Button>
+              ))}
             </div>
           </header>
 
@@ -210,23 +254,26 @@ export default async function ProjectCaseStudyPage({ params }: PageProps) {
 
             {/* 8-Part Case Study Details (8 cols) */}
             <div className="lg:col-span-8 flex flex-col gap-16">
-              {/* Media Showcase: Media Pending Card or Real Before/After Slider */}
+              {/* Media Showcase: ProjectMediaCarousel (with MediaPendingCard fallback) */}
               <section aria-label="Visual Overview">
-                {project.media.beforeAfter ? (
-                  <BeforeAfterSlider
-                    beforeSrc={project.media.beforeAfter.beforeSrc}
-                    afterSrc={project.media.beforeAfter.afterSrc}
-                    beforeLabel={project.media.beforeAfter.beforeLabel}
-                    afterLabel={project.media.beforeAfter.afterLabel}
-                  />
-                ) : (
-                  <MediaPendingCard
-                    projectTitle={project.title}
-                    assetName={project.media.poster}
-                    aspectRatio="video"
-                    note="Screen capture pending. Architecture verified against active codebase."
-                  />
+                {Boolean(project.media.previewVideo && project.media.previewVideo.startsWith("https://")) && (
+                  <div className="relative w-full aspect-video rounded-[20px] overflow-hidden border border-line bg-black mb-6 shadow-2xl">
+                    <iframe
+                      src={project.media.previewVideo}
+                      title={`${project.title} Video Preview`}
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      className="w-full h-full border-0"
+                    />
+                  </div>
                 )}
+                <ProjectMediaCarousel
+                  screenshots={project.media.screenshots}
+                  poster={project.media.poster}
+                  projectTitle={project.title}
+                />
+
+
               </section>
 
               {/* 1. Context */}

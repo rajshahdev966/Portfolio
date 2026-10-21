@@ -174,33 +174,43 @@ body {
   user-select: none;
 }
 
+.hero-portrait {
+  position: absolute;
+  bottom: 0;
+  left: calc(var(--portrait-x) - var(--portrait-w) / 2);
+  width: var(--portrait-w);
+  height: var(--portrait-h);
+}
+
+/* Outline layer is visible ONLY where the portrait's alpha is opaque */
 .hero-outline-layer {
-  -webkit-mask-image: url("/hero/raj-cutout.webp");
-  mask-image: url("/hero/raj-cutout.webp");
+  -webkit-mask-image: var(--hero-portrait-url);
+  mask-image: var(--hero-portrait-url);
   -webkit-mask-repeat: no-repeat;
   mask-repeat: no-repeat;
   -webkit-mask-size: var(--portrait-w) var(--portrait-h);
   mask-size: var(--portrait-w) var(--portrait-h);
-  -webkit-mask-position: left var(--portrait-x) bottom var(--portrait-b);
-  mask-position: left var(--portrait-x) bottom var(--portrait-b);
-  mask-mode: alpha;
+  -webkit-mask-position: calc(var(--portrait-x) - var(--portrait-w) / 2) 100%;
+  mask-position: calc(var(--portrait-x) - var(--portrait-w) / 2) 100%;
+}
+
+/* Transparent fill + thin white border */
+.hero-outline-text {
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  background: none;
+  paint-order: stroke fill;
 }
 
 .hero-stage {
-  --name-size: max(88px, 23cqh);          /* no px cap, scales with the stage */
-
-  --portrait-h: 108cqh;                   /* portrait height */
-  --portrait-ar: 0.8;                     /* cutout width ÷ height: use your file's real ratio */
+  position: relative;
+  isolation: isolate;          /* keeps the z-1/2/3 ordering inside the hero */
+  container-type: size;        /* needed for cqh units */
+  --hero-portrait-url: url("/hero/raj-cutout.webp"); /* same file as the <Image> src */
+  --portrait-ar: 0.8;          /* cutout width / height */
+  --portrait-h: 108cqh;
+  --portrait-x: 50%;
   --portrait-w: calc(var(--portrait-h) * var(--portrait-ar));
-  --portrait-x: calc(50cqw - var(--portrait-w) / 2);   /* left edge */
-  --portrait-b: -4cqh;                    /* bottom offset (negative = bleeds off the bottom) */
-}
-
-.hero-portrait {
-  left: var(--portrait-x);
-  bottom: var(--portrait-b);
-  width: var(--portrait-w);
-  height: var(--portrait-h);
 }
 
 /* Keycap Button Depth & Depression */
@@ -265,18 +275,47 @@ body {
 
 /* Hero Strength Card Explicit Placements */
 .hero-card-1 {
-  left: clamp(12px, 4.5vw, 110px);
-  top: 40%;
+  top: 45%;
+  left: 75%;
+  transform: translateY(-50%);
 }
 
 .hero-card-2 {
-  right: clamp(12px, 4.5vw, 110px);
-  top: 22%;
+  top: 25%;
+  left: 17%;
 }
 
 .hero-card-3 {
-  right: clamp(12px, 4vw, 100px);
-  top: 58%;
+  left: 10%;
+  top: 45%;
+
+}
+
+@media (max-width: 767px) {
+  .hero-card-1,
+  .hero-card-2,
+  .hero-card-3 {
+    left: 16px;
+    right: auto;
+    max-width: 46vw;
+    width: calc(46vw - 8px);
+    padding: 6px 10px;
+  }
+
+  .hero-card-1 {
+    top: 41%;
+    transform: none;
+  }
+
+  .hero-card-2 {
+    top: calc(41% + 56px);
+    transform: none;
+  }
+
+  .hero-card-3 {
+    top: calc(41% + 112px);
+    transform: none;
+  }
 }
 
 /* Strength Card Corner Ticks */

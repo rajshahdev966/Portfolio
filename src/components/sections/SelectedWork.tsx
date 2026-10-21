@@ -6,7 +6,6 @@ import { ArrowUpRight } from "lucide-react";
 import { flagshipProjects } from "@/content/projects";
 import { Badge } from "@/components/ui/Badge";
 import { MediaPendingCard } from "@/components/ui/MediaPendingCard";
-import { ProjectArchive } from "./ProjectArchive";
 import { usePrefersCalm } from "@/hooks/usePrefersCalm";
 import { gsap } from "@/lib/gsap";
 
@@ -50,9 +49,6 @@ export function SelectedWork() {
         {/* Section Header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-16 border-b border-line pb-6">
           <div className="flex flex-col gap-2">
-            <span className="font-mono text-xs uppercase tracking-widest text-accent font-semibold">
-              [ 01 / 06 ] · SELECTED BUILDS
-            </span>
             <h2 className="text-heading-2 text-text font-bold uppercase tracking-tight">
               Selected Work
             </h2>
@@ -208,8 +204,6 @@ export function SelectedWork() {
           </div>
         )}
 
-        {/* Project Archive Table */}
-        <ProjectArchive />
       </div>
     </section>
   );

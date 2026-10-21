@@ -4,7 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { ArrowUp, Github, Linkedin, Twitter, Instagram, Mail } from "lucide-react";
 import { siteConfig } from "@/content/site";
-import { LiveClock } from "@/components/ui/LiveClock";
+
 
 export function Footer() {
   const scrollToTop = () => {
@@ -18,19 +18,11 @@ export function Footer() {
           {/* Col 1: Bio & Positioning (5 cols) */}
           <div className="md:col-span-5 flex flex-col gap-4">
             <div className="flex items-center gap-3">
-              <span className="flex h-7 w-7 items-center justify-center rounded-lg border border-line bg-surface font-mono text-xs font-bold text-accent">
-                RS
-              </span>
               <span className="font-display text-lg font-bold text-text">
                 {siteConfig.name}
               </span>
             </div>
-            <p className="font-sans text-xs text-muted leading-relaxed max-w-sm">
-              {siteConfig.positioningStatement}
-            </p>
-            <div className="pt-2">
-              <LiveClock />
-            </div>
+           
           </div>
 
           {/* Col 2: Navigation Sitemap (3 cols) */}
@@ -51,7 +43,7 @@ export function Footer() {
               Selected Work
             </Link>
             <Link href="/#process" className="font-sans text-xs text-muted hover:text-text transition-colors">
-              Process Methodology
+              Process
             </Link>
             <Link href="/#contact" className="font-sans text-xs text-muted hover:text-text transition-colors">
               Contact & Enquiries
@@ -71,7 +63,7 @@ export function Footer() {
                 className="flex items-center gap-2 hover:text-accent transition-colors"
               >
                 <Linkedin className="h-3.5 w-3.5" />
-                <span>LinkedIn /rajshah-dev (Canonical)</span>
+                <span>LinkedIn</span>
               </a>
               <a
                 href={siteConfig.socials.github}
@@ -83,24 +75,6 @@ export function Footer() {
                 <span>GitHub /rajshahdev966</span>
               </a>
               <a
-                href={siteConfig.socials.x}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 hover:text-accent transition-colors"
-              >
-                <Twitter className="h-3.5 w-3.5" />
-                <span>X (Twitter)</span>
-              </a>
-              <a
-                href={siteConfig.socials.instagram}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 hover:text-accent transition-colors"
-              >
-                <Instagram className="h-3.5 w-3.5" />
-                <span>Instagram</span>
-              </a>
-              <a
                 href={`mailto:${siteConfig.canonicalEmail}`}
                 className="flex items-center gap-2 text-text hover:text-accent transition-colors pt-1"
               >
@@ -109,22 +83,6 @@ export function Footer() {
               </a>
             </div>
           </div>
-        </div>
-
-        {/* Bottom Bar: Integrity Note & Back to Top */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-8 text-[11px] font-mono text-muted">
-          <p>
-            © {new Date().getFullYear()} Raj Shah. Built with Next.js, Obsidian Lime & strict factual integrity.
-          </p>
-
-          <button
-            onClick={scrollToTop}
-            aria-label="Scroll back to top"
-            className="group flex items-center gap-2 rounded-full border border-line bg-surface px-3 py-1 text-muted hover:border-accent hover:text-accent transition-all cursor-pointer"
-          >
-            <span>Back to top</span>
-            <ArrowUp className="h-3.5 w-3.5 transition-transform group-hover:-translate-y-0.5" />
-          </button>
         </div>
       </div>
     </footer>

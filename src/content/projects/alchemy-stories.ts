@@ -40,17 +40,54 @@ export const alchemyStoriesProject: Project = {
   ],
   media: {
     poster: "/projects/alchemy-stories/poster.webp",
-    previewVideo: "/projects/alchemy-stories/preview.mp4",
+    previewVideo: "",
     isMediaPending: true,
     screenshots: [
       {
-        src: "/projects/alchemy-stories/webar-demo.webp",
-        caption: "Browser-native WebAR visualization placing cyanotype artwork in real interior spaces",
+        src: "https://ik.imagekit.io/hqhsgjeub/Portfolio%20Images/photo_2026-07-05_08-41-47.jpg",
+        caption: "Crafted for Beauty, Engineered for result ",
       },
       {
-        src: "/projects/alchemy-stories/editorial-layout.webp",
-        caption: "Story-led editorial presentation detailing botanical craft and preservation techniques",
+        src: "https://ik.imagekit.io/hqhsgjeub/Portfolio%20Images/photo_2026-07-05_08-41-47%20(2).jpg",
+        caption: "Key Highlights",
       },
+      {
+        src: "https://ik.imagekit.io/hqhsgjeub/Portfolio%20Images/photo_2026-07-05_08-41-47%20(3).jpg",
+        caption: "Key Highlights",
+      },
+      {
+        src: "https://ik.imagekit.io/hqhsgjeub/Portfolio%20Images/photo_2026-07-05_08-41-47%20(4).jpg",
+        caption: "Key Highlights",
+      },
+      {
+        src: "https://ik.imagekit.io/hqhsgjeub/Portfolio%20Images/photo_2026-07-05_08-41-47%20(5).jpg",
+        caption: "Key Highlights",
+      },
+      {
+        src: "https://ik.imagekit.io/hqhsgjeub/Portfolio%20Images/photo_2026-07-05_08-41-48.jpg",
+        caption: "Key Highlights",
+      },
+      {
+        src: "https://ik.imagekit.io/hqhsgjeub/Portfolio%20Images/photo_2026-07-05_08-41-48%20(2).jpg",
+        caption: "Key Highlights",
+      },
+      {
+        src: "https://ik.imagekit.io/hqhsgjeub/Portfolio%20Images/photo_2026-07-05_08-41-48%20(3).jpg",
+        caption: "Key Highlights",
+      },
+      {
+        src: "https://ik.imagekit.io/hqhsgjeub/Portfolio%20Images/photo_2026-07-05_08-41-48%20(4).jpg",
+        caption: "Key Highlights",
+      },
+      {
+        src: "https://ik.imagekit.io/hqhsgjeub/Portfolio%20Images/photo_2026-07-05_08-41-48%20(5).jpg",
+        caption: "Key Highlights",
+      },
+      {
+        src: "https://ik.imagekit.io/hqhsgjeub/Portfolio%20Images/photo_2026-07-05_08-41-48%20(6).jpg",
+        caption: "Key Highlights",
+      },
+     
     ],
   },
   caseStudy: {

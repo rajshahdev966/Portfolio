@@ -24,6 +24,7 @@ export const arcProject: Project = {
   links: {
     live: "https://lnkd.in/dqE7cPmS",
     linkedIn: "https://www.linkedin.com/in/rajshah-dev/",
+    github: "www.google.com",
   },
   metrics: [
     {
@@ -38,16 +39,16 @@ export const arcProject: Project = {
     },
   ],
   media: {
-    poster: "/projects/arc/poster.webp",
-    previewVideo: "/projects/arc/preview.mp4",
+    poster: "https://media.licdn.com/dms/image/v2/D4D22AQEX2ZtGB8CbGA/feedshare-shrink_800/B4DaDJWD.0HsAc-/0/1790084399420?e=1793836800&v=beta&t=0kJiWk6jUJiJb_z3Mt4MTRZxxCEfdIU_6o7hVn26jNg",
+    previewVideo: "https://www.youtube.com/embed/p1potl1sbjA?si=r9XMZh01GmU14nte",
     isMediaPending: true,
     screenshots: [
       {
-        src: "/projects/arc/approach-studio.webp",
+        src: "https://ik.imagekit.io/hqhsgjeub/Portfolio%20Images/744562c6-d382-4d02-a348-c973a0e2f103.png",
         caption: "Approach Studio: Comparing brute force vs optimal solution in isolated Monaco instances",
       },
       {
-        src: "/projects/arc/desk-ui.webp",
+        src: "https://ik.imagekit.io/hqhsgjeub/Portfolio%20Images/56cfa145-86b8-4551-a87c-219fadb89c5f.png",
         caption: "Tactile Neo-Brutalist desk aesthetic with ink black and acid lime accents",
       },
     ],

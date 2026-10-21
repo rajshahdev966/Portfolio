@@ -4,14 +4,13 @@ import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { siteConfig } from "@/content/site";
-import { CommandPalette } from "@/components/ui/CommandPalette";
+
 import { MobileMenu } from "./MobileMenu";
 import { cn } from "@/lib/utils";
 
 const NAV_LINKS = [
   { label: "WORK", href: "/#work", sectionId: "work" },
   { label: "PROCESS", href: "/#process", sectionId: "process" },
-  { label: "LAB", href: "/lab", sectionId: "lab" },
   { label: "ABOUT", href: "/about", sectionId: "about" },
   { label: "CONTACT", href: "/#contact", sectionId: "contact" },
 ];
@@ -87,14 +86,10 @@ export function Header() {
       <header
         role="banner"
         className={cn(
-          "fixed top-0 left-0 right-0 z-40 transition-transform duration-300 ease-out py-6 px-6 sm:px-8 lg:px-12",
+          "fixed top-0 left-0 right-0 z-40 transition-transform duration-300 ease-out py-6 px-6 sm:px-8 lg:px-12 bg-transparent",
           isVisible ? "translate-y-0" : "-translate-y-full"
         )}
-        style={{
-          background:
-            "linear-gradient(to bottom, rgba(10, 10, 11, 0.65) 0%, rgba(10, 10, 11, 0.25) 60%, transparent 100%)",
-        }}
-      >
+      > 
         <div className="mx-auto flex items-center justify-between max-w-[1600px]">
           {/* Block 1: Monogram + Name Wordmark */}
           <Link
@@ -102,9 +97,6 @@ export function Header() {
             className="group flex items-center gap-2 select-none"
             aria-label="Raj Shah Home"
           >
-            <span className="font-display font-bold text-accent text-lg tracking-tight">
-              RS
-            </span>
             <span className="font-display font-semibold text-lg tracking-[-0.01em] text-text">
               RAJ SHAH
             </span>
@@ -162,8 +154,6 @@ export function Header() {
         </div>
       </header>
 
-      {/* Global Command Palette (Cmd/Ctrl+K and "/") */}
-      <CommandPalette isOpen={paletteOpen} onClose={() => setPaletteOpen(false)} />
 
       {/* Mobile Full-Screen Menu */}
       <MobileMenu

@@ -39,7 +39,7 @@ export const gharProject: Project = {
   ],
   media: {
     poster: "/projects/ghar/poster.webp",
-    previewVideo: "/projects/ghar/preview.mp4",
+    previewVideo: "",
     isMediaPending: true,
     screenshots: [
       {
