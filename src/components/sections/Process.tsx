@@ -187,10 +187,15 @@ function ProcessCard({
   );
 }
 
+/** Pre-paint on the client, plain effect on the server (no SSR warning). */
+const useIsoLayoutEffect =
+  typeof window !== "undefined" ? React.useLayoutEffect : React.useEffect;
+
 export function Process() {
   const { isCalm } = usePrefersCalm();
 
   const sectionRef = useRef<HTMLElement>(null);
+  const pinWrapperRef = useRef<HTMLDivElement>(null);
   const viewportRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const progressRef = useRef<HTMLDivElement>(null);
@@ -242,13 +247,14 @@ export function Process() {
     [isCalm]
   );
 
-  useEffect(() => {
+  useIsoLayoutEffect(() => {
     const section = sectionRef.current;
+    const pinWrapper = pinWrapperRef.current;
     const viewport = viewportRef.current;
     const track = trackRef.current;
     const progress = progressRef.current;
 
-    if (!section || !viewport || !track) return;
+    if (!section || !pinWrapper || !viewport || !track) return;
 
     const media = window.matchMedia("(min-width: 1025px)");
 
@@ -347,7 +353,7 @@ export function Process() {
           start: "top top",
           end: () => `+=${getDistance()}`,
           scrub: 0.8,
-          pin: true,
+          pin: pinWrapper,
           pinSpacing: true,
           anticipatePin: 1,
           invalidateOnRefresh: true,
@@ -384,6 +390,7 @@ export function Process() {
     }, section);
 
     return () => {
+      ScrollTrigger.getById("process-pin")?.kill(true);
       ctx.revert();
       scrollRangeRef.current = { start: 0, end: 0 };
       activeIndexRef.current = 0;
@@ -395,20 +402,24 @@ export function Process() {
       ref={sectionRef}
       id="process"
       aria-labelledby="process-heading"
-      className="relative z-20 flex min-h-[100svh] flex-col justify-center overflow-clip border-b border-white/[0.08] bg-[#0A0A0B] py-16 lg:h-[100svh] lg:py-0"
+      className="relative z-20 border-b border-white/[0.08] bg-[#0A0A0B]"
     >
-      {/* Background detail */}
       <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 opacity-[0.12]"
-        style={{
-          backgroundImage:
-            "radial-gradient(rgba(255,255,255,0.35) 0.7px, transparent 0.7px)",
-          backgroundSize: "22px 22px",
-          maskImage:
-            "linear-gradient(to bottom, black, transparent 85%)",
-        }}
-      />
+        ref={pinWrapperRef}
+        className="relative flex min-h-[100svh] flex-col justify-center overflow-clip py-16 lg:h-[100svh] lg:py-0 w-full"
+      >
+        {/* Background detail */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 opacity-[0.12]"
+          style={{
+            backgroundImage:
+              "radial-gradient(rgba(255,255,255,0.35) 0.7px, transparent 0.7px)",
+            backgroundSize: "22px 22px",
+            maskImage:
+              "linear-gradient(to bottom, black, transparent 85%)",
+          }}
+        />
 
       <div className="relative mx-auto w-full max-w-[1600px]">
         {/* Header */}
@@ -509,6 +520,7 @@ export function Process() {
           </div>
         </div>
 
+      </div>
       </div>
     </section>
   );

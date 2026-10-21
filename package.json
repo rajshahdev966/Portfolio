@@ -3,8 +3,11 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
+    "predev": "node -e \"try { require('fs').rmSync('.next', { recursive: true, force: true }) } catch {}\"",
     "dev": "next dev",
+    "prebuild": "node -e \"try { require('fs').rmSync('.next', { recursive: true, force: true }) } catch {}\"",
     "build": "next build",
+    "clean": "node -e \"try { require('fs').rmSync('.next', { recursive: true, force: true }) } catch {}\"",
     "start": "next start",
     "lint": "next lint",
     "verify-links": "tsx scripts/verify-links.ts"
