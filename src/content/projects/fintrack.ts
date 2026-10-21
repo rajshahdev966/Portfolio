@@ -22,7 +22,8 @@ export const fintrackProject: Project = {
     "No-Framework Architecture",
   ],
   links: {
-    linkedIn: "https://www.linkedin.com/in/rajshah-dev/",
+    live: "https://fintrack-dashboard-project.vercel.app/",
+    github: "https://github.com/rajshahdev966/Fintrack-Dashboard-Project",
   },
   metrics: [
     {

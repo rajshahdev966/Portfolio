@@ -23,7 +23,7 @@ export const urbannestProject: Project = {
   ],
   links: {
     github: "https://github.com/rajshahdev966/UrbanNest-portfolio2",
-    live: "https://rajshahdev966.github.io/UrbanNest-portfolio2/",
+    live: "https://urban-nest-portfolio2.vercel.app/",
   },
   metrics: [
     {
@@ -38,11 +38,19 @@ export const urbannestProject: Project = {
     },
   ],
   media: {
-    poster: "/projects/urbannest/poster.webp",
+    poster: "https://ik.imagekit.io/hqhsgjeub/Portfolio%20Images/image5.png",
     isMediaPending: true,
     screenshots: [
       {
-        src: "/projects/urbannest/estimator-configurator.webp",
+        src: "https://ik.imagekit.io/hqhsgjeub/Portfolio%20Images/image5.png",
+        caption: "Hero Section of UltraNest",
+      },
+      {
+        src: "https://ik.imagekit.io/hqhsgjeub/Portfolio%20Images/image6.png",
+        caption: "Before-After Slider for Interior Space Transformation",
+      },
+      {
+        src: "https://ik.imagekit.io/hqhsgjeub/Portfolio%20Images/image7.png",
         caption: "Multi-step cost estimator with dynamic pricing formulas based on square footage and finishes",
       },
     ],

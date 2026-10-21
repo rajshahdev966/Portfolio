@@ -38,12 +38,16 @@ export const gharProject: Project = {
     },
   ],
   media: {
-    poster: "/projects/ghar/poster.webp",
-    previewVideo: "",
+    poster: "https://ik.imagekit.io/hqhsgjeub/Portfolio%20Images/image.png",
+    previewVideo: "https://www.youtube.com/embed/D9PZe19E_Ks?si=Scu5eZ7aeqtiFKhp",
     isMediaPending: true,
     screenshots: [
       {
-        src: "/projects/ghar/illustration-spread.webp",
+        src: "https://ik.imagekit.io/hqhsgjeub/Portfolio%20Images/image2.png",
+        caption: "Hero section",
+      },
+      {
+        src: "https://ik.imagekit.io/hqhsgjeub/Portfolio%20Images/image.png",
         caption: "Responsive editorial spread combining evocative typography and custom SVG culinary vignettes",
       },
     ],

@@ -38,12 +38,16 @@ export const brewnestProject: Project = {
     },
   ],
   media: {
-    poster: "/projects/brewnest/poster.webp",
+    poster: "https://ik.imagekit.io/hqhsgjeub/Portfolio%20Images/image3.png",
     previewVideo: "",
     isMediaPending: true,
     screenshots: [
       {
-        src: "/projects/brewnest/reservation-sheet.webp",
+        src: "https://ik.imagekit.io/hqhsgjeub/Portfolio%20Images/image3.png",
+        caption: "Hero section with cinematic background video",
+      },
+      {
+        src: "https://ik.imagekit.io/hqhsgjeub/Portfolio%20Images/image4.png",
         caption: "Asynchronous reservation submission dispatched directly into a sanitized Google Sheets operational log",
       },
     ],

@@ -123,7 +123,7 @@ export default function RootLayout({
             <Header />
 
             {/* Main Landmark */}
-            <main id="main-content" className="relative z-10 flex min-h-screen flex-col pt-16">
+            <main id="main-content" className="relative flex min-h-screen flex-col pt-16">
               {children}
             </main>
 

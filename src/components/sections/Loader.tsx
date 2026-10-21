@@ -205,7 +205,7 @@ export function Loader({ onComplete }: { onComplete?: () => void }) {
       ref={loaderRef}
       role="status"
       aria-label="Loading"
-      className="fixed inset-0 z-50 flex flex-col justify-between bg-[#0A0A0B] p-6 sm:p-12 text-text select-none overflow-hidden will-change-transform"
+      className="fixed inset-0 z-[100] flex flex-col justify-between bg-[#0A0A0B] p-6 sm:p-12 text-text select-none overflow-hidden will-change-transform"
     >
       <span className="sr-only">Loading Raj Shah’s portfolio</span>
 
@@ -287,7 +287,7 @@ export function Loader({ onComplete }: { onComplete?: () => void }) {
         className="flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-line pt-4 font-mono text-xs text-muted"
       >
         <span className="text-center sm:text-left">
-          Design-Led Product Engineering · Nirma University
+          Design-Led Product Engineer · Nirma University
         </span>
         <div className="flex items-center gap-3">
           <div className="h-1 w-32 overflow-hidden rounded-full bg-surface-elevated">

@@ -23,7 +23,6 @@ export const alchemyStoriesProject: Project = {
   ],
   links: {
     github: "https://github.com/rajshahdev966/Alchemy-Stories-Full-Stack-Website",
-    caseStudy: "https://github.com/rajshahdev966/Alchemy-Stories-Full-Stack-Website/blob/main/Website_Features_Showcase.md",
     live: "https://alchermy-stories-deployed-version.vercel.app/",
   },
   metrics: [
@@ -39,7 +38,7 @@ export const alchemyStoriesProject: Project = {
     },
   ],
   media: {
-    poster: "/projects/alchemy-stories/poster.webp",
+    poster: "https://ik.imagekit.io/hqhsgjeub/Portfolio%20Images/744562c6-d382-4d02-a348-c973a0e2f103.png",
     previewVideo: "",
     isMediaPending: true,
     screenshots: [

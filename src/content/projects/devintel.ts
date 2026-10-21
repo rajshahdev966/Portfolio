@@ -6,8 +6,8 @@ export const devintelProject: Project = {
   subtitle: "Cross-Repository Developer Intelligence & Signal Aggregator",
   category: "Developer Tools",
   year: "2026",
-  status: "Source-only / Demo",
-  statusType: "source",
+  status: "Live Product",
+  statusType: "product",
   isFlagship: true,
   order: 2,
   accentColor: "#C6FF3D",
@@ -22,7 +22,8 @@ export const devintelProject: Project = {
     "Algorithms",
   ],
   links: {
-    linkedIn: "https://www.linkedin.com/in/rajshah-dev/",
+    live: "https://dev-intel-eight.vercel.app/",
+    github: "https://github.com/rajshahdev966/DevIntel",
   },
   metrics: [
     {
@@ -41,6 +42,10 @@ export const devintelProject: Project = {
     previewVideo: "",
     isMediaPending: false,
     screenshots: [
+      {
+        src: "https://ik.imagekit.io/hqhsgjeub/Portfolio%20Images/DevIntel%20GitHub%20Intelligence%20Dashboard.png",
+        caption: "Poster for DevIntel",
+      },
       {
         src: "https://ik.imagekit.io/hqhsgjeub/Portfolio%20Images/Screenshot%202026-10-20%20221114.png",
         caption: "Screenshot of the dashboard",
