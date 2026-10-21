@@ -31,10 +31,10 @@ const fontMono = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: `${siteConfig.name} — Design-Led Product Engineering`,
-    template: `%s | ${siteConfig.name}`,
+    default: `Raj Shah — Building Interfaces That Feel Alive`,
+    template: `Raj Shah`,
   },
-  description: siteConfig.positioningStatement,
+  description: "Frontend engineer & product builder crafting cinematic, motion-driven web apps. Explore ARC, DEVIntel and Alchemy Stories.",
   keywords: [
     "Raj Shah",
     "Frontend Engineer",
@@ -55,12 +55,12 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: siteConfig.url,
-    title: `${siteConfig.name} — Design-Led Product Engineering`,
-    description: siteConfig.positioningStatement,
+    title: `Raj Shah — Building Interfaces That Feel Alive.`,
+    description: "Frontend engineer & product builder crafting cinematic, motion-driven web apps. Explore ARC, DEVINTEL and Alchemy Stories.",
     siteName: siteConfig.name,
     images: [
       {
-        url: "/og-image.png",
+        url: "https://ik.imagekit.io/hqhsgjeub/Portfolio%20Images/oc-image.png",
         width: 1200,
         height: 630,
         alt: `${siteConfig.name} Portfolio`,
