@@ -20,15 +20,14 @@ interface HeroNameProps {
 }
 
 function HeroName({ isOutline = false, strokeOpacity = 0.9 }: HeroNameProps) {
-    const textStyle: React.CSSProperties = isOutline
+  const textStyle: React.CSSProperties = isOutline
     ? {
-        color: "rgba(255, 255, 255, 0.10)",
-        WebkitTextFillColor: "rgba(255, 255, 255, 0.66)",
-        WebkitTextStroke: `1px rgba(0, 0, 0, 0.03)`,
-        textShadow: "0 4px 24px rgba(255, 255, 255, 0.08)",
+        color: "transparent",
+        WebkitTextFillColor: "transparent",
+        WebkitTextStroke: `1.5px rgba(255, 255, 255, ${strokeOpacity})`,
+        textShadow: "0 0 16px rgba(198, 255, 61, 0.2)",
       }
     : { color: "#F4F4F0" };
-
 
   const commonClass =
     "inline-block font-display font-extrabold tracking-[-0.02em] leading-[0.82] text-[clamp(88px,23cqh,270px)]";
@@ -107,18 +106,18 @@ function MagneticWrapper({ children, disabled, className }: MagneticWrapperProps
 
 // ---------------------------------------------------------------------------
 // Body anchor coordinates (percentages of the portrait box)
-// Measured from 1122 x 1402 cutout:
-// - CLASS: left collar/shoulder (x: 38.0%, y: 57.0%)
-// - TRAIT: just right of glasses temple (x: 66.5%, y: 33.5%)
-// - ABILITY: right shoulder (x: 73.0%, y: 63.0%)
+// Measured from 1230 x 1279 cutout:
+// - CLASS (card-1): Right shoulder seam (x: 77.0%, y: 60.0%)
+// - TRAIT (card-2): Left glasses temple (x: 34.0%, y: 28.0%)
+// - ABILITY (card-3): Left shoulder / sleeve (x: 30.0%, y: 65.0%)
 // ---------------------------------------------------------------------------
 const BODY_ANCHORS: Record<
   string,
   { xPct: number; yPct: number }
 > = {
-  "card-1": { xPct: 0.73, yPct: 0.61 },  // Right shoulder
-  "card-2": { xPct: 0.30, yPct: 0.34 },  // Temple / side of head
-  "card-3": { xPct: 0.34, yPct: 0.60 },  // Left shoulder
+  "card-1": { xPct: 0.77, yPct: 0.60 },  // Right shoulder
+  "card-2": { xPct: 0.34, yPct: 0.28 },  // Left glasses temple
+  "card-3": { xPct: 0.30, yPct: 0.65 },  // Left shoulder / sleeve
 };
 
 interface ConnectorLine {
@@ -317,12 +316,12 @@ export function Hero() {
 
   // ---------------------------------------------------------------------------
   // Shared portrait box styling
-  // Centred horizontally, bottom-anchored, aspect-ratio matching cutout (1122 / 1402)
-  // height: min(106cqh, calc(96cqw * 1402 / 1122))
+  // Centred horizontally, bottom-anchored, aspect-ratio matching cutout (1230 / 1279)
+  // height: min(104cqh, calc(96cqw * 1279 / 1230))
   // ---------------------------------------------------------------------------
   const sharedPortraitBoxStyle: React.CSSProperties = {
-    height: "min(106cqh, calc(96cqw * 1402 / 1122))",
-    aspectRatio: "1122 / 1402",
+    height: "min(104cqh, calc(96cqw * 1279 / 1230))",
+    aspectRatio: "1230 / 1279",
   };
 
   return (
@@ -362,7 +361,7 @@ export function Hero() {
             priority
             fetchPriority="high"
             sizes="(max-width: 768px) 96vw, (max-width: 1440px) 840px, 920px"
-            className="object-fill drop-shadow-[0_0_18px_rgba(198,255,61,0.12)]"
+            className="object-contain drop-shadow-[0_0_18px_rgba(198,255,61,0.12)]"
           />
           {/* Bottom-edge fade into #0A0A0B */}
           <div
@@ -387,8 +386,8 @@ export function Hero() {
           style={{
             WebkitMaskImage: "url('/hero/raj_shah_hero_image.png')",
             maskImage: "url('/hero/raj_shah_hero_image.png')",
-            WebkitMaskSize: "100% 100%",
-            maskSize: "100% 100%",
+            WebkitMaskSize: "contain",
+            maskSize: "contain",
             WebkitMaskPosition: "center bottom",
             maskPosition: "center bottom",
             WebkitMaskRepeat: "no-repeat",
@@ -434,7 +433,7 @@ export function Hero() {
           <div
             aria-hidden="true"
             className={cn(
-              "pointer-events-none absolute left-1/2 -translate-x-1/2 top-[18%] w-[42%] h-[32%] transition-all duration-200 ease-out",
+              "pointer-events-none absolute left-1/2 -translate-x-1/2 top-[14%] w-[38%] h-[30%] transition-all duration-200 ease-out",
               isLockedOn
                 ? "opacity-100 scale-100"
                 : "opacity-0 scale-[1.15] pointer-events-none"
