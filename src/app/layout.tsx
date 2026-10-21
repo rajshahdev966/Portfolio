@@ -8,6 +8,7 @@ import { SmoothScrollProvider } from "@/components/providers/SmoothScrollProvide
 import { Header } from "@/components/navigation/Header";
 import { Footer } from "@/components/navigation/Footer";
 import { Cursor } from "@/components/ui/Cursor";
+import { MobileDeclineModal } from "@/components/ui/MobileDeclineModal";
 import { Analytics } from "@vercel/analytics/next";
 
 const fontSans = Plus_Jakarta_Sans({
@@ -69,10 +70,10 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `${siteConfig.name} — Design-Led Product Engineering`,
-    description: siteConfig.positioningStatement,
+    title: `Raj Shah — Building Interfaces That Feel Alive.`,
+    description: "Frontend engineer & product builder crafting cinematic, motion-driven web apps. Explore ARC, DEVINTEL and Alchemy Stories.",
     creator: "@rajshahdev966",
-    images: ["/og-image.png"],
+    images: ["https://ik.imagekit.io/hqhsgjeub/Portfolio%20Images/oc-image.png"],
   },
   icons: {
     icon: "/favicon.ico",
@@ -132,6 +133,9 @@ export default function RootLayout({
             <Footer />
           </SmoothScrollProvider>
         </CalmModeProvider>
+
+        {/* Mobile Viewport Decline Advisory */}
+        <MobileDeclineModal />
 
         {/* Vercel Web Analytics */}
         <Analytics />
