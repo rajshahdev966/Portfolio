@@ -8,6 +8,7 @@ import { SmoothScrollProvider } from "@/components/providers/SmoothScrollProvide
 import { Header } from "@/components/navigation/Header";
 import { Footer } from "@/components/navigation/Footer";
 import { Cursor } from "@/components/ui/Cursor";
+import { Analytics } from "@vercel/analytics/next";
 
 const fontSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -131,6 +132,9 @@ export default function RootLayout({
             <Footer />
           </SmoothScrollProvider>
         </CalmModeProvider>
+
+        {/* Vercel Web Analytics */}
+        <Analytics />
       </body>
     </html>
   );
